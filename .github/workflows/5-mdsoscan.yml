@@ -19,7 +19,7 @@ jobs:
         id: msdo
 
       - name: Upload results to Security tab
-        uses: github/codeql-action/upload-sarif@latest
+        uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: ${{ steps.msdo.outputs.sarifFile }}
       
