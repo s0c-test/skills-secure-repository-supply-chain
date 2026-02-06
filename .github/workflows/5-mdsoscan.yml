@@ -46,7 +46,7 @@ jobs:
         with:
           fail-on-severity: moderate
           deny-licenses: GPL-2.0, LGPL-2.1
-          comment-summary-in-pr: always
+         # comment-summary-in-pr: always
 
       - name: Upload SARIF as an Artifact
         uses: actions/upload-artifact@v5
