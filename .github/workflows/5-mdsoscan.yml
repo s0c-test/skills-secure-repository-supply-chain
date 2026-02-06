@@ -27,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: sarif-file
-          path: foo.txt
+          path: ${{ steps.msdo.outputs.sarifFile }}
