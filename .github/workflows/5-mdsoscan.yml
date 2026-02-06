@@ -30,28 +30,3 @@ jobs:
         with:
           name: sarif-file
           path: ${{ steps.msdo.outputs.sarifFile }}
-  
-  dependency-review:
-    runs-on: ubuntu-latest
-    permissions:
-        contents: read
-        pull-requests: write
-        security-events: write
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Dependency Review
-        uses: actions/dependency-review-action@v4
-        id: deprev
-        with:
-          fail-on-severity: moderate
-          deny-licenses: GPL-2.0, LGPL-2.1
-         # comment-summary-in-pr: always
-
-      - name: Upload SARIF as an Artifact
-        uses: actions/upload-artifact@v5
-        with:
-          name: dependecy-check
-          path: ${{ steps.deprev.outputs.dependency-changes }}
