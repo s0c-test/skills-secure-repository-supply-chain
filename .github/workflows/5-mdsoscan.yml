@@ -3,7 +3,7 @@ on:
   push:
     branches: [main,test]
   pull_request:
-    branches: [main,test]
+    branches: [main,test,soc-test]
 
 jobs:
   security-scan:
@@ -17,8 +17,41 @@ jobs:
       - name: Run Microsoft Security DevOps
         uses: microsoft/security-devops-action@latest
         id: msdo
+        with:
+          policy: 'GitHub'
 
       - name: Upload results to Security tab
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ${{ steps.msdo.outputs.sarifFile }}
+      
+      - name: Upload SARIF as an Artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: sarif-file
+          path: ${{ steps.msdo.outputs.sarifFile }}
+  
+  dependency-review:
+    runs-on: ubuntu-latest
+    permissions:
+        contents: read
+        pull-requests: write
+        security-events: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        id: deprev
+        with:
+          fail-on-severity: moderate
+          deny-licenses: GPL-2.0, LGPL-2.1
+         # comment-summary-in-pr: always
+
+      - name: Upload SARIF as an Artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: dependecy-check
+          path: ${{ steps.deprev.outputs.dependency-changes }}
