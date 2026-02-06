@@ -19,6 +19,7 @@
     "fs-extra": "^8.1.0",
     "minimist": "^1.2.8",
     "ora": "^4.0.4",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "lodash": "4.17.10"
   }
 }
