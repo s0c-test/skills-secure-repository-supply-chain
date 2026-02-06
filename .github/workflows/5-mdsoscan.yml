@@ -18,7 +18,7 @@ jobs:
         uses: microsoft/security-devops-action@latest
         id: msdo
         with:
-          policy: 'microsoft'
+          policy: 'GitHub'
 
       - name: Upload results to Security tab
         uses: github/codeql-action/upload-sarif@v3
