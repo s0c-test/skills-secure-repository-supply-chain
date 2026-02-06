@@ -1,9 +1,7 @@
 name: Security Scan
 on:
-  #push:
-  #  branches: [main,test]
   pull_request:
-  #  branches: [main,test,soc-test]
+    branches: [main,test]
 
 jobs:
   dependency-review:
@@ -26,11 +24,9 @@ jobs:
           fail-on-severity: low
           deny-licenses: GPL-2.0, LGPL-2.1
           comment-summary-in-pr: always
-      #    base-ref: 'main'        # The stable branch
-       #   head-ref: ${{ github.sha }} # The current commit you just pushed
 
- #     - name: Upload SARIF as an Artifact
- #       uses: actions/upload-artifact@v5
- #       with:
- #         name: dependecy-check
-  #        path: ${{ steps.deprev.outputs.dependency-changes }}
+      - name: Upload SARIF as an Artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: dependecy-check
+          path: ${{ steps.deprev.outputs.dependency-changes }}
