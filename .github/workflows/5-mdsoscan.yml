@@ -30,3 +30,19 @@ jobs:
         with:
           name: sarif-file
           path: ${{ steps.msdo.outputs.sarifFile }}
+          
+  dependency-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+          deny-licenses: GPL-2.0, LGPL-2.1
+
