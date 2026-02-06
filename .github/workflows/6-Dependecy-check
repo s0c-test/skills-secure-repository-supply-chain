@@ -20,10 +20,12 @@ jobs:
       - name: Dependency Review
         uses: actions/dependency-review-action@v4
         id: deprev
-       # with:
-        #  fail-on-severity: low
-        #  deny-licenses: GPL-2.0, LGPL-2.1
-         # comment-summary-in-pr: always
+        with:
+          fail-on-severity: low
+          deny-licenses: GPL-2.0, LGPL-2.1
+          comment-summary-in-pr: always
+          base-ref: 'main'        # The stable branch
+          head-ref: ${{ github.sha }} # The current commit you just pushed
 
       - name: Upload SARIF as an Artifact
         uses: actions/upload-artifact@v5
