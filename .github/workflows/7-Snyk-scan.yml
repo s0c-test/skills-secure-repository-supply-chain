@@ -2,6 +2,7 @@ name: Snyk test
 on:
   pull_request:
     branches: [main]
+    paths-ignore: '.github/*'
 
 jobs:
   security-scan:
