@@ -2,10 +2,10 @@ name: Security Scan
 on:
   push:
     branches: [main,test]
-    paths-ignore: '.github/*'
+    paths-ignore: '.github/**'
   pull_request:
     branches: [main,test,soc-test]
-    paths-ignore: '.github/*'
+    paths-ignore: '.github/**'
 
 jobs:
   security-scan:
