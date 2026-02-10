@@ -1,8 +1,9 @@
 name: Snyk container scan
-  on:
-   pull_requests:
-     branches: [main]
-     paths: 'container/**'
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths: 'container/**'
 jobs:
     containerscan:
       runs-on: ubuntu-latest
