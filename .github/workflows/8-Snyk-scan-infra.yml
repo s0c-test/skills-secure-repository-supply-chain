@@ -2,7 +2,7 @@ name: Snyk Infrastructure as Code
 on: 
   pull_request: 
     branches: [main]
-    paths-ignore: 'terraform/**'
+    paths: 'terraform/**'
 jobs:
   security:
     runs-on: ubuntu-latest
