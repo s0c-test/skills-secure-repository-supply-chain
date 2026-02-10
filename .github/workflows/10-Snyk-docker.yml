@@ -1,0 +1,29 @@
+name: Snyk container scan
+  on:
+   pull_requests:
+     branches: [main]
+     paths: 'container/**'
+jobs:
+    containerscan:
+      runs-on: ubuntu-latest
+      permissions:
+        security-events: write
+      
+      steps:
+      - uses: action/checkout@v6
+  
+      - name: Snyk container scan
+        uses: snyk/actions/docker@master
+        continue-on-error: true # Essential to allow SARIF upload if bugs are found
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: my-app-image:local
+          args: --file=Dockerfile --severity-threshold=low --sarif-file-output=snyk.sarif
+
+      - name: Upload SARIF to GitHub
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: snyk.sarif
+    
