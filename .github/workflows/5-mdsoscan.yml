@@ -2,10 +2,10 @@ name: Security Scan
 on:
   push:
     branches: [main,test]
-    paths-ignore: 'code/**'
+    paths: 'code/**'
   pull_request:
     branches: [main,test,soc-test]
-    paths-ignore: 'code/**'
+    paths: 'code/**'
 
 jobs:
   security-scan:

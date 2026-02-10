@@ -2,7 +2,7 @@ name: Dependency Check
 on:
   pull_request:
     branches: [main,test]
-    paths-ignore: 'code/**'
+    paths: 'code/**'
 
 jobs:
   dependency-review:
