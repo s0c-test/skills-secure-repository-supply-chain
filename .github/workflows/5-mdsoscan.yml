@@ -20,6 +20,7 @@ jobs:
         uses: microsoft/security-devops-action@latest
         id: msdo
         with:
+          tools: Trivy
           policy: 'GitHub'
 
       - name: Upload results to Security tab
